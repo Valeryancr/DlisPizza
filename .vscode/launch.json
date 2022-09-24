@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch ProyectoPograApplication",
+            "request": "launch",
+            "mainClass": "com.vancra.proyecto_pogra.ProyectoPograApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProyectoPograApplication<proyecto_pogra>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.vancra.proyecto_pogra.ProyectoPograApplication",
+            "projectName": "proyecto_pogra",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GatewayApplication<gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.vancra.gateway.GatewayApplication",
+            "projectName": "gateway",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DiscoveryApplication<discovery>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.vancra.discovery.DiscoveryApplication",
+            "projectName": "discovery",
+            "args": ""
+        }
+    ]
+}

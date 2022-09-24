@@ -1,0 +1,69 @@
+hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 2000
+hystrix.command.default.execution.isolation.strategy: THREAD
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+
+      routes:
+
+        - id: seminario-project
+          # load balancer !!!!!!
+          # que funcionar con ayuda de un Discovery Service
+          uri: lb://seminario-project
+          predicates:
+            - Path=/api/dw/**
+          filters:
+            - RewritePath=/api/(?<dw>.*), /$\{dw}
+            - AddResponseHeader=X-Some-Header, aboullaite.me
+
+        - id: NODE-JS-APP
+          uri: http://localhost:4200/
+          predicates:
+            - Path=/frontend/**
+          filters:
+            - RewritePath=/frontend/(?<service>.*), /$\{service}
+            - AddResponseHeader=X-Some-Header, aboullaite.me
+
+server:
+  port: 8887
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka
+  instance:
+    preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        #include: hystrix.stream
+
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.cloud.gateway: DEBUG
